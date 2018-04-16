@@ -1,0 +1,45 @@
+# define which instance mounts we have configured
+export EOS_FUSE_MOUNTS="user cms"
+
+# #################################################################
+# shared EOS FUSE options
+# #################################################################
+# in-memory write-back shared cache
+export EOS_FUSE_CACHE_SIZE=268435456
+# just normal logging
+export EOS_FUSE_DEBUG=0
+# not to verbose - just prints timing and errors
+export EOS_FUSE_LOGLEVEL=5
+# don't wast time to do parallel IO - only useful for RAIN layouts
+export EOS_FUSE_NOPIO=1
+# configure 256k readahead (additional to 128k kernel readahead)
+export EOS_FUSE_RDAHEAD=1
+export EOS_FUSE_RDAHEAD_WINDOW=262144
+# stop rm -r for directories with deepness <=2
+export EOS_FUSE_RMLVL_PROTECT=2
+# configure JEMALLOC
+test -e /usr/lib64/libjemalloc.so.1 && export LD_PRELOAD=/usr/lib64/libjemalloc.so.1
+
+# #################################################################
+# shared XrdCl options
+# #################################################################
+# tag xroot traffic
+export XRD_APPNAME=eos-fuse
+export XRD_CONNECTIONRETRY=4096
+export XRD_CONNECTIONWINDOW=10
+# keep connections to FSTs for 5 minutes
+export XRD_DATASERVERTTL=300
+# keep connections to MGM for 30 minutes
+export XRD_LOADBALANCERTTL=1800
+# standard verbosity for logging
+export XRD_LOGLEVEL=Info
+# don't follow more than 5 redirects
+export XRD_REDIRECTLIMIT=5
+# short request timeout of 60s - might be low for high throughput storage
+export XRD_REQUESTTIMEOUT=60
+export XRD_STREAMERRORWINDOW=15
+export XRD_STREAMTIMEOUT=15
+# interval how often timeouts are checked .. to get ~60s we have to set it to a second
+export XRD_TIMEOUTRESOLUTION=1
+# client worker thread pool
+export XRD_WORKERTHREADS=16

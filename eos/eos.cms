@@ -1,0 +1,6 @@
+# from where do we mount ...
+export EOS_FUSE_MGM_ALIAS=eoscms.cern.ch
+# where to we mount
+export EOS_FUSE_MOUNTDIR=/eos/cms/
+# authentication
+export EOS_FUSE_USER_KRB5CC=1
